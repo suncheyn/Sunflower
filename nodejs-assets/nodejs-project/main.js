@@ -4,19 +4,7 @@
 var rn_bridge = require('rn-bridge');
 
 function getResults(uri){      
-      const PredictionApiClient = require("azure-cognitiveservices-customvision-prediction");
-      const fs = require('fs');
-      const predictor = new PredictionApiClient("21dacdd8dc234726ba8bd867714d6322", "https://southcentralus.api.cognitive.microsoft.com");
-      const testFile = fs.readFileSync(uri);
-
-      const results = predictor.classifyImage("750f513e-7db3-4dc7-85f6-de036ceca83a", publishIterationName, testFile);
-      var result = 
-      // Step 6. Show results
-      console.log("Results:");
-      results.predictions.forEach(predictedResult => {
-          result += "\t ${predictedResult.tagName}: ${(predictedResult.probability * 100.0).toFixed(2)}%";
-      });
-      return result;
+  return uri;
 }
 
 // Echo every message received from react-native.

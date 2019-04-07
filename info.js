@@ -16,6 +16,17 @@ export default class InfoScreen extends React.Component {
         this.setState({ fontLoaded: true });
     }
 
+  // componentWillMount()
+  // {
+  //   nodejs.start("main.js");
+  //   nodejs.channel.addListener(
+  //     "message",
+  //     (msg) => {
+  //       alert("From node: " + msg);
+  //     },
+  //     this
+  //   );
+  // }
 
   render() {
     console.log("hi")
@@ -31,8 +42,8 @@ export default class InfoScreen extends React.Component {
             <Text style={styles.title}>Flower Data</Text>
         ) : null
         }
-        <Button title="Message Node" style={styles.description} onPress={() => nodejs.channel.send('hello')}/>
-        
+        {/*<Button title="Message Node" style={styles.description} onPress={() => nodejs.channel.send('hello')}/>*/}
+         <Text style={styles.description}>{nodejs.channel.send("hello")}</Text>
         </View>
     );
   }
