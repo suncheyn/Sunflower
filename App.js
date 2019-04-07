@@ -7,7 +7,6 @@ import HomeScreen from './home.js';
 import CameraScreen from './camera.js';
 import InfoScreen from './info.js';
 
-
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeScreen},
   Camera: {screen: CameraScreen},
@@ -17,6 +16,7 @@ const MainNavigator = createStackNavigator({
 const AppNavigator = createAppContainer(MainNavigator);
 
 export default class App extends React.Component {
+
   render(){
     return (
       <AppNavigator/>

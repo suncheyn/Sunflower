@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 19400,
-  "expoServerNgrokUrl": "https://qs-vpj.suncheyn98.flowerpower.exp.direct",
-  "packagerNgrokUrl": "https://packager.qs-vpj.suncheyn98.flowerpower.exp.direct",
-  "ngrokPid": 6752,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002
 }
