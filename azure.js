@@ -3,13 +3,13 @@
 
 const fs = require('fs');
 const util = require('util');
-//const TrainingApiClient = require("azure-cognitiveservices-customvision-training");
+const TrainingApiClient = require("azure-cognitiveservices-customvision-training");
 const PredictionApiClient = require("azure-cognitiveservices-customvision-prediction");
 
 const setTimeoutPromise = util.promisify(setTimeout);
 
-const trainingKey = "TRAINING KEY";
-const predictionKey = "PREDICTION KEY";
+const trainingKey = "25cec4a86dc049a4be1e5eca60c89262";
+const predictionKey = "21dacdd8dc234726ba8bd867714d6322";
 const predictionResourceId = "/subscriptions/d58f919c-a94b-4339-99c8-a6a29dec1793/resourceGroups/GoddessesAtWork/providers/Microsoft.CognitiveServices/accounts/GoddessesAtWork_prediction";
 const sampleDataRoot = "Flowers";
 
@@ -17,14 +17,14 @@ const endPoint = "https://southcentralus.api.cognitive.microsoft.com"
 
 const publishIterationName = "classifyModel";
 
-//const trainer = new TrainingApiClient(trainingKey, endPoint);
+const trainer = new TrainingApiClient(trainingKey, endPoint);
 
 (async () => {
     console.log("Creating project...");
-    //const flowerProject = await trainer.createProject("GoddessesAtWork")
-
+    const flowerProject = await trainer.createProject("GoddessesAtWork")
+    console.log("here?????");
     //const adorationTag = await trainer.createTag(flowerProject.id, "Adoration");
-/*    const carnationTag = await trainer.createTag(flowerProject.id, "Carnation");
+    const carnationTag = await trainer.createTag(flowerProject.id, "Carnation");
     const daisyTag = await trainer.createTag(flowerProject.id, "Daisy");
     //const mothersDayTag = await trainer.createTag(flowerProject.id, "Mother's Day");
     //const pinkTag = await trainer.createTag(flowerProject.id, "Pink");
@@ -48,10 +48,11 @@ const publishIterationName = "classifyModel";
     //const partyTag = await trainer.createTag(flowerProject.id, "Party");
     //const purityTag = await trainer.createTag(flowerProject.id, "Purity");
     const roseTag = await trainer.createTag(flowerProject.id, "Rose");
-    const tulipTag = await trainer.createTag(flowerProject.id, "Tulip");*/
+    const tulipTag = await trainer.createTag(flowerProject.id, "Tulip");
     //const yellowTag = await trainer.createTag(flowerProject.id, "Yellow");
 
-   /* let fileUploadPromises = [];
+    let fileUploadPromises = [];
+    console.log("DID WE GET STUCK HERE?");
 
     const carnationDir = '${sampleDataRoot}/Carnation';
     const carnationFiles = fs.readdirSync(carnationDir);
@@ -112,7 +113,7 @@ const publishIterationName = "classifyModel";
 	console.log("Training...");
     let trainingIteration = await trainer.trainProject(flowerProject.id);
 
-    Wait for training to complete
+    // Wait for training to complete
     console.log("Training started...");
     while (trainingIteration.status == "Training") {
         console.log("Training status: " + trainingIteration.status);
@@ -122,13 +123,13 @@ const publishIterationName = "classifyModel";
     console.log("Training status: " + trainingIteration.status);
 
     trainingIteration.isDefault = true;
-    await trainer.updateIteration(flowerProject.id, trainingIteration.id, trainingIteration);*/
+    await trainer.updateIteration(flowerProject.id, trainingIteration.id, trainingIteration);
 
 
 	const predictor = new PredictionApiClient(predictionKey, endPoint);
-    const testFile = fs.readFileSync('Test/test.jpg');
+    const testFile = fs.readFileSync('${sampleDataRoot}/Test/test.jpg');
 
-    const results = await predictor.predictImage("b86b5741-366d-4151-8e9c-71161678654e", testFile, PredictImageOptionalParameter.iterationid());
+    const results = await predictor.predictImage(flowerProject.id, testFile, { iterationId: trainingIteration.id });
 
     // Step 6. Show results
     console.log("Results:");

@@ -17,6 +17,7 @@ export default ({
     onCaptureIn, onCaptureOut, onLongCapture, onShortCapture, 
     navigation = null,
     captures = [],
+    uri = null,
 }) => (
     <Grid style={styles.bottomToolbar}>
         <Row>
@@ -54,7 +55,7 @@ export default ({
                 </TouchableOpacity>
             </Col>
             <Col style={styles.alignCenter}>
-                <TouchableOpacity onPress={() => {if (data.captures.length > 0) {navigation.navigate('Info')}}}>
+                <TouchableOpacity onPress={() => {if (data.captures.length > 0) {this.uri = data.captures[0].uri; console.log(this.uri); navigation.navigate('Info', {uri: this.uri})}}}>
                     <Ionicons
                         name="md-checkmark-circle"
                         color="white"
